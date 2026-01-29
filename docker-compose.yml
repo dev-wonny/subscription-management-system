@@ -20,6 +20,21 @@ services:
     restart: always
     ports:
       - "8080:8080"
+  backend:
+    build: ./backend
+    container_name: subscription_backend
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: homework
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
 
 volumes:
   postgres_data:
